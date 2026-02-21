@@ -52,7 +52,7 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ============= SCALE ĐỀU - GIỐNG ZOOM OUT PC TRÊN DT =============
+// ============= SCALE ĐỀU - TO VỪA MÀN HÌNH DT, GIỐNG PC =============
 function updateScale() {
     const container = document.querySelector('.scale-container');
     if (!container) return;
@@ -63,16 +63,16 @@ function updateScale() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Scale theo chiều rộng trước (để giữ full ngang), rồi giới hạn chiều cao
+    // Ưu tiên scale theo chiều rộng (để banner rộng full như PC)
     let scale = vw / baseW;
 
-    // Nếu scale theo width làm cao quá màn hình thì điều chỉnh theo height
-    if ((baseH * scale) > vh) {
+    // Nếu scale theo width làm banner cao quá màn hình thì điều chỉnh theo height
+    if (baseH * scale > vh) {
         scale = vh / baseH;
     }
 
-    // Không để nhỏ quá (điều chỉnh số này nếu vẫn nhỏ: thử 0.9, 1.0)
-    scale = Math.max(scale, 0.85);
+    // Giới hạn min để banner không nhỏ quá (thử chỉnh số này nếu vẫn nhỏ)
+    scale = Math.max(scale, 0.9);  // 0.9 thường đẹp trên DT, thử 1.0 nếu crop nhẹ
 
     container.style.transform = `scale(${scale})`;
 }
@@ -80,4 +80,4 @@ function updateScale() {
 window.addEventListener('load', updateScale);
 window.addEventListener('resize', updateScale);
 window.addEventListener('orientationchange', updateScale);
-updateScale(); // chạy ngay
+updateScale(); // chạy ngay lập tức
