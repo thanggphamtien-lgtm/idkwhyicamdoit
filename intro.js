@@ -52,26 +52,29 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ============= SCALE HOÀN HẢO CHO MOBILE =============
+// ============= SCALE ĐỀU - GIỐNG ZOOM OUT PC TRÊN DT =============
 function updateScale() {
     const container = document.querySelector('.scale-container');
     if (!container) return;
 
-    const baseW = 1600;
-    const baseH = 900;
+    const baseW = 1742;  // khớp với CSS
+    const baseH = 980;
 
-    const scaleX = window.innerWidth / baseW;
-    const scaleY = window.innerHeight / baseH;
+    // Tính scale để vừa khít cả ngang lẫn dọc
+    let scale = Math.min(
+        window.innerWidth / baseW,
+        window.innerHeight / baseH
+    );
 
-    // Scale đều + không nhỏ quá (0.65 là đẹp trên hầu hết điện thoại)
-    let scale = Math.min(scaleX, scaleY, 1);
-    scale = Math.max(scale, 0.65);
+    // Giới hạn min để không nhỏ quá (điều chỉnh nếu muốn to hơn trên DT)
+    scale = Math.max(scale, 0.7);  // thử 0.8 hoặc 0.9 nếu vẫn nhỏ
 
     container.style.transform = `scale(${scale})`;
+    // Center chính xác hơn
+    container.style.margin = 'auto';
 }
 
-// Chạy ngay khi load + mỗi khi resize/xoay màn hình
 window.addEventListener('load', updateScale);
 window.addEventListener('resize', updateScale);
 window.addEventListener('orientationchange', updateScale);
-updateScale(); // chạy lần đầu luôn
+updateScale(); // chạy ngay

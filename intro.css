@@ -1914,20 +1914,25 @@ body{
         transform: scale(1);
     }
  }
-/* ============= SCALE ĐÚNG - GIỐNG PC TRÊN DT ============= */
+/* ============= SCALE GIỐNG PC TRÊN DT - VỪA KHÍT ============= */
 .scale-wrapper {
     width: 100vw;
     height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background: #000;
+    background: transparent; /* Không nền đen */
 }
 
 .scale-container {
-    width: 1920px;     /* ← thay bằng chiều rộng thật của banner bạn */
-    height: 1080px;    /* ← thay bằng chiều cao thật của banner bạn */
+    width: 1742px;       /* Kích thước gốc của bgr.jpg */
+    height: 980px;       /* Kích thước gốc */
     position: relative;
     transform-origin: center center;
+    background: transparent;
 }
+
+/* Không cần media query phức tạp nữa */
