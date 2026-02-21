@@ -52,3 +52,21 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
+// ====================== SCALE CHO MOBILE ======================
+function updateScale() {
+    const container = document.querySelector('.scale-container');
+    if (!container) return;
+
+    const baseW = 1600;
+    const baseH = 900;
+
+    const scaleX = window.innerWidth / baseW;
+    const scaleY = window.innerHeight / baseH;
+    let scale = Math.min(scaleX, scaleY, 1);   // không zoom to quá
+
+    document.documentElement.style.setProperty('--scale', scale);
+}
+
+window.addEventListener('load', updateScale);
+window.addEventListener('resize', updateScale);
+window.addEventListener('orientationchange', updateScale);
