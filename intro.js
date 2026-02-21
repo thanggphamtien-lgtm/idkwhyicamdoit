@@ -52,7 +52,7 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ============= SCALE ĐỀU - TO VỪA MÀN HÌNH DT =============
+// ============= SCALE ĐỀU - GIỐNG ZOOM OUT PC TRÊN DT =============
 function updateScale() {
     const container = document.querySelector('.scale-container');
     if (!container) return;
@@ -60,14 +60,19 @@ function updateScale() {
     const baseW = 1742;
     const baseH = 980;
 
-    // Tính scale để vừa khít (giống zoom out)
-    let scale = Math.min(
-        window.innerWidth / baseW,
-        window.innerHeight / baseH
-    );
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
 
-    // Không để nhỏ quá (điều chỉnh nếu muốn to hơn)
-    scale = Math.max(scale, 0.85);  // 0.85 thường đẹp trên DT, thử 0.9 hoặc 1 nếu crop nhẹ
+    // Scale theo chiều rộng trước (để giữ full ngang), rồi giới hạn chiều cao
+    let scale = vw / baseW;
+
+    // Nếu scale theo width làm cao quá màn hình thì điều chỉnh theo height
+    if ((baseH * scale) > vh) {
+        scale = vh / baseH;
+    }
+
+    // Không để nhỏ quá (điều chỉnh số này nếu vẫn nhỏ: thử 0.9, 1.0)
+    scale = Math.max(scale, 0.85);
 
     container.style.transform = `scale(${scale})`;
 }

@@ -1914,21 +1914,23 @@ body{
         transform: scale(1);
     }
  }
-/* ============= SCALE ĐÚNG TỶ LỆ 1742x980 - GIỐNG PC TRÊN DT ============= */
+/* ============= SCALE GIỐNG PC TRÊN DT - FULL VỪA MÀN HÌNH ============= */
 .scale-wrapper {
     width: 100vw;
     height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background: transparent; /* bỏ nền đen */
 }
 
 .scale-container {
-    width: 1742px;      /* kích thước gốc của bgr.jpg */
+    width: 1742px;        /* gốc từ ảnh bgr.jpg của bạn */
     height: 980px;
     position: relative;
-    transform-origin: center center;
+    transform-origin: top center;  /* scale từ trên xuống, tránh crop trên */
     background: transparent;
 }
