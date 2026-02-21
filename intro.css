@@ -1914,29 +1914,21 @@ body{
         transform: scale(1);
     }
  }
- /* ====================== SCALE ĐỀU CHO PC & MOBILE ====================== */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
+/* ============= SCALE HOÀN HẢO CHO MOBILE & PC ============= */
 .scale-wrapper {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     overflow: hidden;
-    background: #000;
+    background: #000;           /* nền đen đẹp hơn */
 }
 
 .scale-container {
-    width: 1600px;     /* ← thay bằng chiều rộng thật của banner bạn */
-    height: 900px;     /* ← thay bằng chiều cao thật của banner bạn */
+    width: 1600px;      /* kích thước gốc banner */
+    height: 900px;      /* kích thước gốc banner */
     position: relative;
     transform-origin: center center;
-    transform: scale(var(--scale, 1));
+    /* Không set width/height bằng JS nữa */
 }

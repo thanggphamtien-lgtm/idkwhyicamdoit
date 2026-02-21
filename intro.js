@@ -52,7 +52,7 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ====================== SCALE CHO MOBILE ======================
+// ============= SCALE HOÀN HẢO CHO MOBILE =============
 function updateScale() {
     const container = document.querySelector('.scale-container');
     if (!container) return;
@@ -62,11 +62,16 @@ function updateScale() {
 
     const scaleX = window.innerWidth / baseW;
     const scaleY = window.innerHeight / baseH;
-    let scale = Math.min(scaleX, scaleY, 1);   // không zoom to quá
 
-    document.documentElement.style.setProperty('--scale', scale);
+    // Scale đều + không nhỏ quá (0.65 là đẹp trên hầu hết điện thoại)
+    let scale = Math.min(scaleX, scaleY, 1);
+    scale = Math.max(scale, 0.65);
+
+    container.style.transform = `scale(${scale})`;
 }
 
+// Chạy ngay khi load + mỗi khi resize/xoay màn hình
 window.addEventListener('load', updateScale);
 window.addEventListener('resize', updateScale);
 window.addEventListener('orientationchange', updateScale);
+updateScale(); // chạy lần đầu luôn
