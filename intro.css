@@ -1914,7 +1914,7 @@ body{
         transform: scale(1);
     }
  }
-/* ============= SCALE HOÀN HẢO CHO MOBILE & PC ============= */
+/* ============= SCALE ĐÚNG - GIỐNG PC TRÊN DT ============= */
 .scale-wrapper {
     width: 100vw;
     height: 100vh;
@@ -1922,13 +1922,12 @@ body{
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background: #000;           /* nền đen đẹp hơn */
+    background: #000;
 }
 
 .scale-container {
-    width: 1600px;      /* kích thước gốc banner */
-    height: 900px;      /* kích thước gốc banner */
+    width: 1920px;     /* ← thay bằng chiều rộng thật của banner bạn */
+    height: 1080px;    /* ← thay bằng chiều cao thật của banner bạn */
     position: relative;
     transform-origin: center center;
-    /* Không set width/height bằng JS nữa */
 }
