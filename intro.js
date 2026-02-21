@@ -52,26 +52,24 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ============= SCALE ĐỀU - GIỐNG ZOOM OUT PC TRÊN DT =============
+// ============= SCALE ĐỀU - TO VỪA MÀN HÌNH DT =============
 function updateScale() {
     const container = document.querySelector('.scale-container');
     if (!container) return;
 
-    const baseW = 1742;  // khớp với CSS
+    const baseW = 1742;
     const baseH = 980;
 
-    // Tính scale để vừa khít cả ngang lẫn dọc
+    // Tính scale để vừa khít (giống zoom out)
     let scale = Math.min(
         window.innerWidth / baseW,
         window.innerHeight / baseH
     );
 
-    // Giới hạn min để không nhỏ quá (điều chỉnh nếu muốn to hơn trên DT)
-    scale = Math.max(scale, 0.7);  // thử 0.8 hoặc 0.9 nếu vẫn nhỏ
+    // Không để nhỏ quá (điều chỉnh nếu muốn to hơn)
+    scale = Math.max(scale, 0.85);  // 0.85 thường đẹp trên DT, thử 0.9 hoặc 1 nếu crop nhẹ
 
     container.style.transform = `scale(${scale})`;
-    // Center chính xác hơn
-    container.style.margin = 'auto';
 }
 
 window.addEventListener('load', updateScale);
