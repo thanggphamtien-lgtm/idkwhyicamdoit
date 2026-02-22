@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="intro.css">
     <title>Happy New Year 2024</title>
     <style>
-        :root {
-            --zoom-scale: 1; /* Biến này sẽ do JS điều khiển */
-        }
+        /* Thiết lập nền đen và căn giữa tuyệt đối cho wrapper */
         body {
             margin: 0;
             padding: 0;
@@ -22,23 +20,27 @@
             justify-content: center;
             align-items: center;
         }
-        /* Lớp trung gian này sẽ gánh phần scale, không đụng vào code cũ của bạn */
+
+        /* Lớp này dùng để co giãn toàn bộ nội dung mà không đụng chạm vào animation bên trong */
         .zoom-engine {
-            transform: scale(var(--zoom-scale));
-            transform-origin: center center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 1742px; /* Kích thước chuẩn PC */
+            width: 1742px; /* Kích thước chuẩn PC của bạn */
             height: 980px;
+            position: relative;
+            transform-origin: center center; /* Thu nhỏ từ tâm */
             flex-shrink: 0;
             will-change: transform;
+        }
+
+        /* Đảm bảo nội dung cũ của bạn lấp đầy cái engine này */
+        .box-slider {
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
 </head>
 <body>
 
-    <div class="zoom-engine">
+    <div class="zoom-engine" id="zoomEngine">
         <div class="box-slider">
             <div class="slider1">
                 <img src="image/bgr.jpg" alt="">

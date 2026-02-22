@@ -52,23 +52,26 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// Thay thế đoạn autoScale cũ bằng đoạn này
-function applySmartScale() {
-    const root = document.documentElement;
-    const baseWidth = 1742;
-    const baseHeight = 980;
+function handleSmartZoom() {
+    const engine = document.getElementById('zoomEngine');
+    if (!engine) return;
 
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
+    const baseW = 1742; // Chiều rộng gốc của HCN
+    const baseH = 980;  // Chiều cao gốc của HCN
 
-    // Tính toán tỷ lệ
-    const scale = Math.min(screenW / baseWidth, screenH / baseHeight);
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
 
-    // Cập nhật biến CSS, toàn bộ nội dung sẽ co giãn theo biến này
-    root.style.setProperty('--zoom-scale', scale);
+    // Tính toán tỷ lệ scale tốt nhất để vừa khít màn hình
+    const scale = Math.min(winW / baseW, winH / baseH);
+
+    // Áp dụng scale cho lớp engine trung gian
+    engine.style.transform = `scale(${scale})`;
 }
 
-window.addEventListener('load', applySmartScale);
-window.addEventListener('resize', applySmartScale);
-// Chạy ngay lập tức để tránh bị giật hình lúc đầu
-applySmartScale();
+// Lắng nghe sự kiện xoay màn hình hoặc thay đổi kích thước
+window.addEventListener('resize', handleSmartZoom);
+window.addEventListener('load', handleSmartZoom);
+
+// Thực thi ngay lập tức
+handleSmartZoom();
