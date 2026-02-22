@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="intro.css">
     <title>Happy New Year 2024</title>
     <style>
-        /* Thiết lập nền và khung nhìn */
+        /* Khóa cứng body để không bị cuộn */
         body {
             margin: 0;
             padding: 0;
@@ -21,20 +21,27 @@
             align-items: center;
         }
 
-        /* Lớp gánh trách nhiệm thu nhỏ, tách biệt hoàn toàn với code cũ */
-        .viewport-fix {
-            width: 1742px; /* Kích thước chuẩn PC của bạn */
-            height: 980px;
-            position: relative;
-            flex-shrink: 0;
+        /* Lớp nền mô phỏng một màn hình PC ảo */
+        .pc-screen-simulator {
+            width: 1742px; /* Chiều rộng gốc của bạn */
+            height: 980px; /* Chiều cao gốc của bạn */
+            position: absolute;
             transform-origin: center center;
-            transition: transform 0.1s linear;
+            will-change: transform;
+            display: block;
+        }
+
+        /* Đảm bảo nội dung cũ chiếm trọn màn hình ảo này */
+        .box-slider {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
-    <div class="viewport-fix" id="scaler">
+    <div class="pc-screen-simulator" id="virtualScreen">
+        
         <div class="box-slider">
             <div class="slider1">
                 <img src="image/bgr.jpg" alt="">
@@ -96,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
     <audio id="song">
         <source src="image/TetBinhAnRemix-HanaCamTien9CMedia-8539226.mp3" type="audio/mp3">

@@ -52,22 +52,33 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-function fixLayout() {
-    const el = document.getElementById('scaler');
-    if (!el) return;
+// Thêm vào cuối file intro.js
+function resizeVirtualScreen() {
+    const screen = document.getElementById('virtualScreen');
+    if (!screen) return;
 
-    const dw = 1742; // Width gốc
-    const dh = 980;  // Height gốc
-    const ww = window.innerWidth;
-    const wh = window.innerHeight;
+    // Kích thước mong muốn (PC)
+    const targetWidth = 1742;
+    const targetHeight = 980;
 
-    const scale = Math.min(ww / dw, wh / dh);
+    // Kích thước thực tế (Điện thoại)
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
 
-    // Sử dụng transform để thu nhỏ toàn bộ khối mà không ảnh hưởng layer bên trong
-    el.style.transform = `scale(${scale})`;
+    // Tính toán tỷ lệ scale
+    const scale = Math.min(windowWidth / targetWidth, windowHeight / targetHeight);
+
+    // Sử dụng zoom cho trình duyệt hỗ trợ (Chrome, Safari) để mượt hơn
+    // Nếu không hỗ trợ thì fallback sang transform
+    if ('zoom' in screen.style) {
+        screen.style.zoom = scale;
+    } else {
+        screen.style.transform = `scale(${scale})`;
+    }
 }
 
-// Gọi hàm
-window.addEventListener('resize', fixLayout);
-window.addEventListener('load', fixLayout);
-fixLayout();
+// Lắng nghe các sự kiện
+window.addEventListener('resize', resizeVirtualScreen);
+window.addEventListener('load', resizeVirtualScreen);
+// Chạy ngay khi load
+resizeVirtualScreen();
