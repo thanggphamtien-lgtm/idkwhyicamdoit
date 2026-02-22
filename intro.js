@@ -52,36 +52,29 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// Đảm bảo mọi thứ chạy sau khi DOM đã sẵn sàng
-document.addEventListener('DOMContentLoaded', function() {
-    
-    function perfectScale() {
-        const wrapper = document.getElementById('perfect-wrapper');
-        if (!wrapper) return;
+function applyGlobalScale() {
+    const el = document.getElementById('mainLayout');
+    if (!el) return;
 
-        // Kích thước thiết kế chuẩn
-        const baseW = 1742;
-        const baseH = 980;
+    const designW = 1742;
+    const designH = 980;
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
 
-        // Kích thước thực tế màn hình
-        const winW = window.innerWidth;
-        const winH = window.innerHeight;
+    const scale = Math.min(winW / designW, winH / designH);
 
-        // Tính tỷ lệ scale (fit cả ngang và dọc)
-        const scale = Math.min(winW / baseW, winH / baseH);
-
-        // Áp dụng scale bằng thuộc tính CSS cực mạnh
-        // backface-visibility giúp fix lỗi mờ hình trên một số trình duyệt mobile
-        wrapper.style.transform = `scale(${scale})`;
-        wrapper.style.webkitTransform = `scale(${scale})`;
+    // Dùng zoom để bảo vệ toàn bộ transform animation bên trong
+    // Zoom thu nhỏ kích thước nhưng giữ nguyên hệ quy chiếu transform
+    if (typeof el.style.zoom !== 'undefined') {
+        el.style.zoom = scale;
+        el.style.transform = 'none';
+    } else {
+        // Fallback cho Firefox hoặc trình duyệt cũ
+        el.style.transform = `scale(${scale})`;
+        el.style.transformOrigin = 'center center';
     }
+}
 
-    // Lắng nghe sự kiện để cập nhật khi xoay điện thoại
-    window.addEventListener('resize', perfectScale);
-    
-    // Gọi lần đầu
-    perfectScale();
-
-    // Fix lỗi cho một số dòng máy yếu, gọi lại sau 300ms
-    setTimeout(perfectScale, 300);
-});
+window.addEventListener('resize', applyGlobalScale);
+window.addEventListener('load', applyGlobalScale);
+applyGlobalScale();

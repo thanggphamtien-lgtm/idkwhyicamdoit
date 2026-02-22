@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="intro.css">
     <title>Happy New Year 2024</title>
     <style>
-        /* Khung bao ngoài cùng để căn giữa mọi thứ */
+        /* Khung ngoài cùng cố định màn hình */
         body {
             margin: 0;
             padding: 0;
@@ -19,23 +19,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px; /* Hỗ trợ các animation 3D nếu có */
         }
 
-        /* Lớp bảo vệ: Cô lập hoàn toàn scale và animation */
-        #perfect-wrapper {
-            width: 1742px; /* Kích thước chuẩn PC của bạn */
+        /* Lớp bảo vệ số 1: Giữ không gian PC 1742x980 */
+        .pc-container {
+            width: 1742px;
             height: 980px;
             position: relative;
-            transform-origin: center center;
-            will-change: transform;
-            backface-visibility: hidden;
+            flex-shrink: 0;
+            display: block;
         }
 
-        /* Đảm bảo nội dung gốc không bị tràn */
+        /* Đảm bảo nội dung cũ của bạn luôn nằm trọn trong khung PC */
         .box-slider {
-            width: 100% !important;
-            height: 100% !important;
+            width: 1742px !important;
+            height: 980px !important;
             position: absolute !important;
             top: 0;
             left: 0;
@@ -44,7 +42,7 @@
 </head>
 <body>
 
-    <div id="perfect-wrapper">
+    <div class="pc-container" id="mainLayout">
         <div class="box-slider">
             <div class="slider1">
                 <img src="image/bgr.jpg" alt="">
@@ -97,7 +95,7 @@
                         <div class="right">
                             <div class="content">
                                 <div class="title"><h1>&#129505; Gửi E!</h1></div>
-                                <p>Chúc mừng năm mới! Chúc bạn và gia đình một mùa Tết sum vầy, đầm ấm và tràn đầy niềm vui...</p>
+                                <p>Chúc mừng năm mới! Chúc bạn an khang thịnh vượng...</p>
                                 <div class="fixedContent"><h3>Người gửi: VjetDev</h3></div>
                             </div>
                         </div>
