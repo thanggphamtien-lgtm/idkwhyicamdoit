@@ -52,54 +52,36 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// ============= SCALE ĐỀU - TO VỪA MÀN HÌNH DT, GIỐNG PC =============
-function updateScale() {
-    const container = document.querySelector('.scale-container');
+// Thêm vào cuối cùng của file intro.js
+
+function autoScale() {
+    const container = document.getElementById('main-content');
     if (!container) return;
 
-    const baseW = 1742;
-    const baseH = 980;
+    // Kích thước chuẩn bạn muốn hiển thị (giống trong CSS)
+    const baseWidth = 1742;
+    const baseHeight = 980;
 
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    // Ưu tiên scale theo chiều rộng (để banner rộng full như PC)
-    let scale = vw / baseW;
-
-    // Nếu scale theo width làm banner cao quá màn hình thì điều chỉnh theo height
-    if (baseH * scale > vh) {
-        scale = vh / baseH;
-    }
-
-    // Giới hạn min để banner không nhỏ quá (thử chỉnh số này nếu vẫn nhỏ)
-    scale = Math.max(scale, 0.9);  // 0.9 thường đẹp trên DT, thử 1.0 nếu crop nhẹ
-
-    container.style.transform = `scale(${scale})`;
-}
-
-window.addEventListener('load', updateScale);
-window.addEventListener('resize', updateScale);
-window.addEventListener('orientationchange', updateScale);
-updateScale(); // chạy ngay lập tức
-// Thêm vào cuối file intro.js
-function autoScale() {
-    const container = document.querySelector('.scale-container');
-    const baseWidth = 1742;  // Giống thông số bên CSS
-    const baseHeight = 980; // Giống thông số bên CSS
-
+    // Lấy kích thước thực tế của trình duyệt người dùng
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
-    // Tính toán tỷ lệ thu nhỏ dựa trên chiều nào bị chèn ép nhiều hơn
-    const scale = Math.min(
-        windowWidth / baseWidth,
-        windowHeight / baseHeight
-    );
+    // Tính toán tỷ lệ thu nhỏ
+    const scaleX = windowWidth / baseWidth;
+    const scaleY = windowHeight / baseHeight;
 
-    // Áp dụng tỷ lệ scale
+    // Chọn tỷ lệ nhỏ hơn để đảm bảo không bị mất nội dung
+    const scale = Math.min(scaleX, scaleY);
+
+    // Áp dụng scale
     container.style.transform = `scale(${scale})`;
 }
 
-// Chạy khi trang web tải xong và khi xoay màn hình
-window.addEventListener('load', autoScale);
-window.addEventListener('resize', autoScale);
+// Chạy hàm khi trang web load xong
+window.onload = autoScale;
+
+// Chạy hàm khi người dùng thay đổi kích thước trình duyệt hoặc xoay điện thoại
+window.onresize = autoScale;
+
+// Gọi thêm 1 lần sau 100ms để chắc chắn các trình duyệt mobile tính toán đúng
+setTimeout(autoScale, 100);
