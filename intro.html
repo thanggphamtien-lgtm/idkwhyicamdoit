@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="intro.css">
     <title>Happy New Year 2024</title>
     <style>
+        :root {
+            --zoom-scale: 1; /* Biến này sẽ do JS điều khiển */
+        }
         body {
             margin: 0;
             padding: 0;
@@ -19,85 +22,81 @@
             justify-content: center;
             align-items: center;
         }
-        .scale-wrapper {
+        /* Lớp trung gian này sẽ gánh phần scale, không đụng vào code cũ của bạn */
+        .zoom-engine {
+            transform: scale(var(--zoom-scale));
+            transform-origin: center center;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-        #main-content {
-            width: 1742px; /* Giữ nguyên kích thước PC của bạn */
+            width: 1742px; /* Kích thước chuẩn PC */
             height: 980px;
-            position: relative;
-            transform-origin: center center;
-            will-change: transform; /* Tối ưu hóa cho trình duyệt */
+            flex-shrink: 0;
+            will-change: transform;
         }
     </style>
 </head>
 <body>
 
-    <div class="scale-wrapper">
-        <div id="main-content">
-            <div class="box-slider">
-                <div class="slider1">
-                    <img src="image/bgr.jpg" alt="">
-                    <div class="happynewyear">
-                        <div class="textHappynewyear">
-                            <div class="box-span"><span></span></div>
-                            <div class="box-span"><span></span></div>
-                            <div class="box-span"><span></span></div>
-                            <div class="box-span"><span></span></div>
-                        </div>
+    <div class="zoom-engine">
+        <div class="box-slider">
+            <div class="slider1">
+                <img src="image/bgr.jpg" alt="">
+                <div class="happynewyear">
+                    <div class="textHappynewyear">
+                        <div class="box-span"><span></span></div>
+                        <div class="box-span"><span></span></div>
+                        <div class="box-span"><span></span></div>
+                        <div class="box-span"><span></span></div>
                     </div>
-                    <div class="box-button">
-                        <div class="button">
-                            <button>Ấn vào đây nè!</button>
-                            <span><i class="fa-solid fa-heart"></i></span>
-                        </div>
-                    </div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
-                    <div class="flower-img"><img src="image/flower.png" alt=""></div>
                 </div>
+                <div class="box-button">
+                    <div class="button">
+                        <button>Ấn vào đây nè!</button>
+                        <span><i class="fa-solid fa-heart"></i></span>
+                    </div>
+                </div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+                <div class="flower-img"><img src="image/flower.png" alt=""></div>
+            </div>
 
-                <div class="box-slider_img1">
-                    <div class="circle"></div>
-                    <div class="cat"><img src="image/cat.png" alt=""></div>
-                    <div class="box-number">
-                        <div class="number">
-                            <img src="image/2.png" alt=""><img src="image/0.png" alt="">
-                            <img src="image/2.png" alt=""><img src="image/4.png" alt="">
+            <div class="box-slider_img1">
+                <div class="circle"></div>
+                <div class="cat"><img src="image/cat.png" alt=""></div>
+                <div class="box-number">
+                    <div class="number">
+                        <img src="image/2.png" alt=""><img src="image/0.png" alt="">
+                        <img src="image/2.png" alt=""><img src="image/4.png" alt="">
+                    </div>
+                </div>
+                <div class="box-rhombus">
+                    <div class="rhombus"><div class="text"><h1>An</h1></div></div>
+                    <div class="rhombus"><div class="text"><h1>Khang</h1></div></div>
+                </div>
+                <div class="rhombus-img"><img src="image/rhombus.png" alt=""></div>
+                <div class="mail"><i class="fa-solid fa-envelope"></i></div>
+
+                <div class="slider3">
+                    <div class="box-slider3">
+                        <div class="left">
+                            <div class="apricot_blossom">
+                                <img src="image/apricot-blossom.png" alt=""><img src="image/apricot-blossom.png" alt="">
+                                <img src="image/apricot-blossom.png" alt=""><img src="image/apricot-blossom.png" alt="">
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="content">
+                                <div class="title"><h1>&#129505; Gửi E!</h1></div>
+                                <p>Chúc mừng năm mới! Chúc bạn an khang thịnh vượng...</p>
+                                <div class="fixedContent"><h3>Người gửi: VjetDev</h3></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="box-rhombus">
-                        <div class="rhombus"><div class="text"><h1>An</h1></div></div>
-                        <div class="rhombus"><div class="text"><h1>Khang</h1></div></div>
-                    </div>
-                    <div class="rhombus-img"><img src="image/rhombus.png" alt=""></div>
-                    <div class="mail"><i class="fa-solid fa-envelope"></i></div>
-
-                    <div class="slider3">
-                        <div class="box-slider3">
-                            <div class="left">
-                                <div class="apricot_blossom">
-                                    <img src="image/apricot-blossom.png" alt=""><img src="image/apricot-blossom.png" alt="">
-                                    <img src="image/apricot-blossom.png" alt=""><img src="image/apricot-blossom.png" alt="">
-                                </div>
-                            </div>
-                            <div class="right">
-                                <div class="content">
-                                    <div class="title"><h1>&#129505; Gửi E!</h1></div>
-                                    <p>Chúc mừng năm mới! Chúc bạn và gia đình một mùa Tết sum vầy...</p>
-                                    <div class="fixedContent"><h3>Người gửi: VjetDev</h3></div>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
+                    <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
         </div>
