@@ -52,33 +52,36 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-// Thêm vào cuối file intro.js
-function resizeVirtualScreen() {
-    const screen = document.getElementById('virtualScreen');
-    if (!screen) return;
+// Đảm bảo mọi thứ chạy sau khi DOM đã sẵn sàng
+document.addEventListener('DOMContentLoaded', function() {
+    
+    function perfectScale() {
+        const wrapper = document.getElementById('perfect-wrapper');
+        if (!wrapper) return;
 
-    // Kích thước mong muốn (PC)
-    const targetWidth = 1742;
-    const targetHeight = 980;
+        // Kích thước thiết kế chuẩn
+        const baseW = 1742;
+        const baseH = 980;
 
-    // Kích thước thực tế (Điện thoại)
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+        // Kích thước thực tế màn hình
+        const winW = window.innerWidth;
+        const winH = window.innerHeight;
 
-    // Tính toán tỷ lệ scale
-    const scale = Math.min(windowWidth / targetWidth, windowHeight / targetHeight);
+        // Tính tỷ lệ scale (fit cả ngang và dọc)
+        const scale = Math.min(winW / baseW, winH / baseH);
 
-    // Sử dụng zoom cho trình duyệt hỗ trợ (Chrome, Safari) để mượt hơn
-    // Nếu không hỗ trợ thì fallback sang transform
-    if ('zoom' in screen.style) {
-        screen.style.zoom = scale;
-    } else {
-        screen.style.transform = `scale(${scale})`;
+        // Áp dụng scale bằng thuộc tính CSS cực mạnh
+        // backface-visibility giúp fix lỗi mờ hình trên một số trình duyệt mobile
+        wrapper.style.transform = `scale(${scale})`;
+        wrapper.style.webkitTransform = `scale(${scale})`;
     }
-}
 
-// Lắng nghe các sự kiện
-window.addEventListener('resize', resizeVirtualScreen);
-window.addEventListener('load', resizeVirtualScreen);
-// Chạy ngay khi load
-resizeVirtualScreen();
+    // Lắng nghe sự kiện để cập nhật khi xoay điện thoại
+    window.addEventListener('resize', perfectScale);
+    
+    // Gọi lần đầu
+    perfectScale();
+
+    // Fix lỗi cho một số dòng máy yếu, gọi lại sau 300ms
+    setTimeout(perfectScale, 300);
+});
