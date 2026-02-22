@@ -52,26 +52,22 @@ buttonSong.onclick= function(){
         mySong.play()
     }
 }
-function handleSmartZoom() {
-    const engine = document.getElementById('zoomEngine');
-    if (!engine) return;
+function fixLayout() {
+    const el = document.getElementById('scaler');
+    if (!el) return;
 
-    const baseW = 1742; // Chiều rộng gốc của HCN
-    const baseH = 980;  // Chiều cao gốc của HCN
+    const dw = 1742; // Width gốc
+    const dh = 980;  // Height gốc
+    const ww = window.innerWidth;
+    const wh = window.innerHeight;
 
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
+    const scale = Math.min(ww / dw, wh / dh);
 
-    // Tính toán tỷ lệ scale tốt nhất để vừa khít màn hình
-    const scale = Math.min(winW / baseW, winH / baseH);
-
-    // Áp dụng scale cho lớp engine trung gian
-    engine.style.transform = `scale(${scale})`;
+    // Sử dụng transform để thu nhỏ toàn bộ khối mà không ảnh hưởng layer bên trong
+    el.style.transform = `scale(${scale})`;
 }
 
-// Lắng nghe sự kiện xoay màn hình hoặc thay đổi kích thước
-window.addEventListener('resize', handleSmartZoom);
-window.addEventListener('load', handleSmartZoom);
-
-// Thực thi ngay lập tức
-handleSmartZoom();
+// Gọi hàm
+window.addEventListener('resize', fixLayout);
+window.addEventListener('load', fixLayout);
+fixLayout();

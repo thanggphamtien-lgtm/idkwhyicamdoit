@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="intro.css">
     <title>Happy New Year 2024</title>
     <style>
-        /* Thiết lập nền đen và căn giữa tuyệt đối cho wrapper */
+        /* Thiết lập nền và khung nhìn */
         body {
             margin: 0;
             padding: 0;
@@ -21,26 +21,20 @@
             align-items: center;
         }
 
-        /* Lớp này dùng để co giãn toàn bộ nội dung mà không đụng chạm vào animation bên trong */
-        .zoom-engine {
+        /* Lớp gánh trách nhiệm thu nhỏ, tách biệt hoàn toàn với code cũ */
+        .viewport-fix {
             width: 1742px; /* Kích thước chuẩn PC của bạn */
             height: 980px;
             position: relative;
-            transform-origin: center center; /* Thu nhỏ từ tâm */
             flex-shrink: 0;
-            will-change: transform;
-        }
-
-        /* Đảm bảo nội dung cũ của bạn lấp đầy cái engine này */
-        .box-slider {
-            width: 100% !important;
-            height: 100% !important;
+            transform-origin: center center;
+            transition: transform 0.1s linear;
         }
     </style>
 </head>
 <body>
 
-    <div class="zoom-engine" id="zoomEngine">
+    <div class="viewport-fix" id="scaler">
         <div class="box-slider">
             <div class="slider1">
                 <img src="image/bgr.jpg" alt="">
