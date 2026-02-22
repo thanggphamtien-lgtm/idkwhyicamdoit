@@ -85,3 +85,30 @@ window.onresize = autoScale;
 
 // Gọi thêm 1 lần sau 100ms để chắc chắn các trình duyệt mobile tính toán đúng
 setTimeout(autoScale, 100);
+function autoScale() {
+    const container = document.getElementById('main-content');
+    if (!container) return;
+
+    const baseWidth = 1742; 
+    const baseHeight = 980;
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Tính tỷ lệ scale chuẩn
+    const scaleX = windowWidth / baseWidth;
+    const scaleY = windowHeight / baseHeight;
+    const scale = Math.min(scaleX, scaleY);
+
+    // Chỉ áp dụng scale nếu có sự thay đổi đáng kể để tránh lag animation
+    container.style.transform = `scale(${scale})`;
+}
+
+// Thay vì gọi liên tục, dùng debounce để mượt hơn khi xoay màn hình
+window.addEventListener('resize', () => {
+    clearTimeout(window.scaleTimeout);
+    window.scaleTimeout = setTimeout(autoScale, 200);
+});
+
+window.addEventListener('load', autoScale);
+autoScale();
