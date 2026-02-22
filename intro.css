@@ -1934,3 +1934,21 @@ body{
     transform-origin: top center; /* scale từ trên xuống, tránh crop phần trên */
     background: transparent;
 }
+/* Thêm vào cuối file intro.css */
+.scale-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Căn giữa nội dung nếu màn hình quá lớn hoặc quá nhỏ */
+    overflow: hidden;
+    background: #000; /* Màu nền lấp khoảng trống nếu có */
+}
+
+.scale-container {
+    width: 1742px; /* Chiều rộng gốc thiết kế trên PC của bạn */
+    height: 980px; /* Chiều cao gốc thiết kế trên PC của bạn */
+    flex-shrink: 0;
+    transform-origin: center center; /* Thu nhỏ từ tâm */
+    position: relative;
+}

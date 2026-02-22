@@ -81,3 +81,25 @@ window.addEventListener('load', updateScale);
 window.addEventListener('resize', updateScale);
 window.addEventListener('orientationchange', updateScale);
 updateScale(); // chạy ngay lập tức
+// Thêm vào cuối file intro.js
+function autoScale() {
+    const container = document.querySelector('.scale-container');
+    const baseWidth = 1742;  // Giống thông số bên CSS
+    const baseHeight = 980; // Giống thông số bên CSS
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Tính toán tỷ lệ thu nhỏ dựa trên chiều nào bị chèn ép nhiều hơn
+    const scale = Math.min(
+        windowWidth / baseWidth,
+        windowHeight / baseHeight
+    );
+
+    // Áp dụng tỷ lệ scale
+    container.style.transform = `scale(${scale})`;
+}
+
+// Chạy khi trang web tải xong và khi xoay màn hình
+window.addEventListener('load', autoScale);
+window.addEventListener('resize', autoScale);
